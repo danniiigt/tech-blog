@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const Navbar = (props) => {
+export const Navbar = (props) => {
   return (
     <div>
       <div className="py-[15px] px-[20px] bg-primary/75 text-white">
@@ -43,5 +43,3 @@ const Navbar = (props) => {
     </div>
   );
 };
-
-export default Navbar;
