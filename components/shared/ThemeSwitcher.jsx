@@ -5,8 +5,6 @@ import { Button } from "../ui/button";
 export const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
 
-  console.log(theme);
-
   if (theme === "dark")
     return (
       <Button

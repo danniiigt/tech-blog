@@ -9,17 +9,13 @@ import { timeAgo } from "@/lib/timeAgo";
 
 export const PostCard = ({ post }) => {
   const imageProps = useNextSanityImage(sanityClient, post.mainImage);
-  console.log(imageProps);
-
-  console.log(post);
 
   return (
-    <Link href={`/posts/${post.slug.current}`}>
+    <Link href={`/post/${post.slug.current}`}>
       <Card
         className="
             group 
-            hover:border-muted-foreground/30 
-            hover:shadow-lg
+            hover:border-muted-foreground/50 
             transition 
             duration-200
             border-none
@@ -30,8 +26,8 @@ export const PostCard = ({ post }) => {
             p-0 
             overflow-hidden 
             border 
-            rounded-t 
-            group-hover:border-muted-foreground/30
+            rounded-t-md
+            group-hover:border-muted-foreground/50
             transition-all
             duration-300
           "
@@ -43,11 +39,12 @@ export const PostCard = ({ post }) => {
             height={imageProps.height}
             className="
                 w-full 
-                h-full 
-                rounded-lg
                 group-hover:scale-110
                 transition-all
                 duration-200
+                object-cover
+                object-center
+                h-[190px]
             "
           />
         </CardContent>
@@ -62,10 +59,11 @@ export const PostCard = ({ post }) => {
             border-l
             border-r
             border-b 
-            rounded-b
-            group-hover:border-muted-foreground/30
+            rounded-b-md
+            group-hover:border-muted-foreground/50
             transition-all
             duration-300
+            bg-muted/20
           "
         >
           <h1 className="text-muted-foreground truncate">{post.title}</h1>

@@ -1,5 +1,3 @@
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Header } from "./components/Header";
 import { Container } from "@/components/shared/Container";
 import { Categories } from "./components/Categories";
 import { BlogList } from "./components/BlogList";
@@ -10,8 +8,6 @@ const Page = async () => {
 
   return (
     <Container>
-      <Header />
-
       <div className="my-6">
         <Categories />
       </div>
