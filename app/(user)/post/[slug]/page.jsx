@@ -20,12 +20,12 @@ const PostPage = async ({ params }) => {
             <h1 className="text-xl">{post?.title}</h1>
 
             <div className="text-muted-foreground flex items-center gap-2">
-              <h1 className="text-xs">Publicado {timeAgo(post._createdAt)}</h1>
+              <h1 className="text-xs">Publicado {timeAgo(post?._createdAt)}</h1>
               <Separator orientation="vertical" className="h-2" />
-              <h1 className="text-xs">{post.author.name}</h1>
+              <h1 className="text-xs">{post?.author?.name}</h1>
               <Separator orientation="vertical" className="h-2" />
-              {post?.categories[0] && (
-                <h1 className="text-xs">{post.categories[0].title}</h1>
+              {post?.categories?.[0] && (
+                <h1 className="text-xs">{post?.categories?.[0]?.title}</h1>
               )}
               <Separator orientation="vertical" className="h-2" />
               <h1 className="text-xs">192 visitas</h1>
@@ -112,7 +112,7 @@ const PostPage = async ({ params }) => {
         </div> */}
 
         <div className="mt-4 space-y-4 w-full md:w-3/4 lg:2/3 text-muted-foreground">
-          <PortableText value={post.body} components={RichTextComponents} />
+          <PortableText value={post?.body} components={RichTextComponents} />
         </div>
       </div>
     </Container>

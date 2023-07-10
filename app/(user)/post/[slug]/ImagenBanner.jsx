@@ -8,10 +8,10 @@ export const ImagenBanner = ({ imagen }) => {
   return (
     <div>
       <Image
-        src={imageProps.src}
+        src={imageProps?.src || ""}
         alt={"Banner"}
-        width={imageProps.width}
-        height={imageProps.height}
+        width={imageProps?.width}
+        height={imageProps?.height}
         className="
             w-full
             object-cover

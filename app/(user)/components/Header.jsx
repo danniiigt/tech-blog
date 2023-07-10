@@ -2,8 +2,12 @@ import { UserMenu } from "./UserMenu";
 import { ThemeSwitcher } from "@/components/shared/ThemeSwitcher";
 import { HeaderHome } from "./HeaderHome";
 import Link from "next/link";
+import getCurrentUser from "@/actions/getCurrentUser";
+import StudioButton from "./StudioButton";
 
-export const Header = () => {
+export const Header = async () => {
+  const user = await getCurrentUser();
+
   return (
     <header className="flex items-center justify-between">
       <div href="/">
@@ -27,8 +31,9 @@ export const Header = () => {
 
       <div className="flex items-center gap-x-2 text-muted-foreground">
         <HeaderHome />
+        <StudioButton user={user} />
         <ThemeSwitcher />
-        <UserMenu />
+        <UserMenu user={user} />
       </div>
     </header>
   );

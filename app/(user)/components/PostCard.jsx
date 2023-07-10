@@ -3,9 +3,9 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { useNextSanityImage } from "next-sanity-image";
 import { sanityClient } from "@/lib/sanity.client";
+import { timeAgo } from "@/lib/timeAgo";
 import Link from "next/link";
 import Image from "next/image";
-import { timeAgo } from "@/lib/timeAgo";
 
 export const PostCard = ({ post }) => {
   const imageProps = useNextSanityImage(sanityClient, post.mainImage);
@@ -33,10 +33,10 @@ export const PostCard = ({ post }) => {
           "
         >
           <Image
-            src={imageProps.src}
+            src={imageProps?.src || ""}
             alt={post.title}
-            width={imageProps.width}
-            height={imageProps.height}
+            width={imageProps?.width}
+            height={imageProps?.height}
             className="
                 w-full 
                 group-hover:scale-110
@@ -66,13 +66,13 @@ export const PostCard = ({ post }) => {
             bg-muted/20
           "
         >
-          <h1 className="text-muted-foreground truncate">{post.title}</h1>
+          <h1 className="text-muted-foreground truncate">{post?.title}</h1>
           <div className="flex flex-col">
             <h1 className="whitespace-nowrap text-xs text-muted-foreground">
-              {post.author.name}
+              {post?.author?.name}
             </h1>
             <h1 className="whitespace-nowrap text-xs text-muted-foreground/50">
-              {timeAgo(post._createdAt)}
+              {timeAgo(post?._createdAt)}
             </h1>
           </div>
         </CardFooter>

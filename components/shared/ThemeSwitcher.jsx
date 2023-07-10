@@ -9,7 +9,7 @@ export const ThemeSwitcher = () => {
     return (
       <Button
         variant="text"
-        className="rounded-full aspect-square p-2"
+        className="rounded-full aspect-square p-2 text-muted-foreground"
         onClick={() => setTheme("light")}
       >
         <svg
