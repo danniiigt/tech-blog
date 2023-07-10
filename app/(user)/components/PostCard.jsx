@@ -11,7 +11,7 @@ export const PostCard = ({ post }) => {
   const imageProps = useNextSanityImage(sanityClient, post.mainImage);
 
   return (
-    <Link href={`/post/${post.slug.current}`}>
+    <Link href={`/post/${post?.slug?.current}`}>
       <Card
         className="
             group 

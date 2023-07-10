@@ -10,7 +10,10 @@ export const getAllPosts = async () => {
   } | order(_createdAt desc)`;
 
   const posts = await sanityClient.fetch(query, {
-    cache: "no-store",
+    cache: "no-cache",
+    next: {
+      revalidate: 1,
+    },
   });
   return posts;
 };
