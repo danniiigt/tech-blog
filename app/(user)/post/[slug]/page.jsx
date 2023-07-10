@@ -80,37 +80,6 @@ const PostPage = async ({ params }) => {
           </div>
         </div>
 
-        {/* <div className="mt-4 space-y-4 w-full md:w-3/4 lg:2/3 text-muted-foreground">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-            itaque veritatis debitis, corporis vero accusantium et at expedita
-            inventore cum adipisci suscipit beatae autem quisquam nesciunt
-            laborum sunt molestias dicta architecto? Similique corrupti, eius
-            repellendus optio voluptate suscipit commodi sequi nisi? Aut,
-            quaerat quae dicta hic quidem cupiditate neque explicabo magnam
-            atque magni optio veniam dignissimos, autem eligendi quibusdam
-            voluptatibus facilis id voluptatum eius fugiat nostrum culpa vitae.
-          </p>
-
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo est
-            alias odio atque cumque mollitia, aperiam blanditiis enim velit
-            voluptatem vero vel? Necessitatibus enim odio, quisquam suscipit,
-            deserunt labore praesentium odit amet aliquam, sit corporis culpa
-            nemo. Eaque, accusamus asperiores perspiciatis iusto assumenda ipsa
-            consequatur magni dolor nulla repellendus. Accusantium ipsa dicta
-            repellendus id consequatur, accusamus repellat nemo eligendi animi!
-          </p>
-
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore,
-            modi nihil. Similique, explicabo voluptatum. Reiciendis illum cum
-            minus quae odio illo. Repudiandae eaque a placeat impedit inventore
-            quos rem illo? Quas iure voluptates doloremque dolore, perferendis
-            inventore cum blanditiis fuga?
-          </p>
-        </div> */}
-
         <div className="mt-4 space-y-4 w-full md:w-3/4 lg:2/3 text-muted-foreground">
           <PortableText value={post?.body} components={RichTextComponents} />
         </div>

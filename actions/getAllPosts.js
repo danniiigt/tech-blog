@@ -9,6 +9,8 @@ export const getAllPosts = async () => {
     categories[]->,
   } | order(_createdAt desc)`;
 
-  const posts = await sanityClient.fetch(query);
+  const posts = await sanityClient.fetch(query, {
+    cache: "no-store",
+  });
   return posts;
 };
