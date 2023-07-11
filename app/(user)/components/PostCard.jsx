@@ -13,7 +13,7 @@ export const PostCard = ({ post, index }) => {
   return (
     <Link
       href={`/post/${post?.slug?.current}`}
-      className="animate__animated animate__fadeIn relative z-50"
+      className="animate__animated animate__fadeIn w-full"
     >
       <Card
         className="
@@ -22,6 +22,7 @@ export const PostCard = ({ post, index }) => {
             transition 
             duration-200
             border-none
+            
         "
       >
         <CardContent
@@ -41,13 +42,14 @@ export const PostCard = ({ post, index }) => {
             width={imageProps?.width}
             height={imageProps?.height}
             className="
-                w-full 
+                w-full
                 group-hover:scale-110
                 transition-all
                 duration-200
                 object-cover
                 object-center
-                h-[190px]
+                h-[210px]
+                md:h-[190px]
             "
           />
         </CardContent>
@@ -69,8 +71,8 @@ export const PostCard = ({ post, index }) => {
             bg-muted/20
           "
         >
-          <h1 className="text-muted-foreground truncate">{post?.title}</h1>
-          <div className="flex flex-col">
+          <h1 className="text-muted-foreground sm:truncate">{post?.title}</h1>
+          <div className="flex w-fit flex-col">
             <h1 className="whitespace-nowrap text-right text-xs text-muted-foreground">
               {post?.author?.name}
             </h1>

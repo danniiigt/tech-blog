@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import useSWR from "swr";
 
 export const Categories = () => {
-  const { setCategory } = useCategory();
+  const { category, setCategory } = useCategory();
   const { data: categories, isLoading } = useSWR(
     "categories",
     getAllCategories
@@ -46,7 +46,11 @@ export const Categories = () => {
   }, []);
 
   return (
-    <Tabs defaultValue="todo" className="tabs-container">
+    <Tabs
+      defaultValue="todo"
+      value={category?.id ? category.id : "todo"}
+      className="tabs-container"
+    >
       <TabsList className="w-full block scroll-hidden justify-between">
         <div className="scroll-content flex gap-1">
           {!isLoading && (
@@ -54,10 +58,10 @@ export const Categories = () => {
               onClick={() => setCategory(null)}
               value="todo"
               className="
-            hover:bg-background/60
-            transition
-            duration-200
-            "
+                hover:bg-background/60
+                transition
+                duration-200
+                "
             >
               Todo
             </TabsTrigger>
