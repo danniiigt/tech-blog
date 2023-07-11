@@ -39,8 +39,8 @@ export const PostCard = ({ post, index }) => {
           <Image
             src={imageProps?.src || ""}
             alt={post.title}
-            width={imageProps?.width}
-            height={imageProps?.height}
+            width={400}
+            height={240}
             className="
                 w-full
                 group-hover:scale-110

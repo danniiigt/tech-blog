@@ -15,7 +15,7 @@ const PostPage = async ({ params }) => {
       <div className="my-8 fadeIn">
         <ImagenBanner imagen={post?.mainImage} />
 
-        <div className="mt-8 flex items-center justify-between">
+        <div className="mt-8 flex flex-col mb-2 sm:flex-row gap-y-4 items-start sm:items-center justify-between">
           <div>
             <h1 className="text-xl">{post?.title}</h1>
 
@@ -32,7 +32,7 @@ const PostPage = async ({ params }) => {
             </div>
           </div>
 
-          <div className="flex items-center gap-4 text-muted-foreground">
+          <div className="hidden sm:flex items-center gap-4 text-muted-foreground">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -79,6 +79,8 @@ const PostPage = async ({ params }) => {
             </svg>
           </div>
         </div>
+
+        <Separator className="block sm:hidden mt-4" />
 
         <div className="mt-4 space-y-4 w-full md:w-3/4 lg:2/3 text-muted-foreground">
           <PortableText value={post?.body} components={RichTextComponents} />

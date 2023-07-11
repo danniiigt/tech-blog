@@ -10,14 +10,14 @@ export const ImagenBanner = ({ imagen }) => {
       <Image
         src={imageProps?.src || ""}
         alt={"Banner"}
-        width={imageProps?.width}
-        height={imageProps?.height}
+        width={1024}
+        height={400}
         className="
-            w-full
-            object-cover
-            object-center
-            h-[390px]
-            rounded-lg
+          w-full
+          object-cover
+          object-center
+          h-[390px]
+          rounded-lg
         "
       />
     </div>
