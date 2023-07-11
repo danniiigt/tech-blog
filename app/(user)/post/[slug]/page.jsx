@@ -12,7 +12,7 @@ const PostPage = async ({ params }) => {
 
   return (
     <Container>
-      <div className="my-8">
+      <div className="my-8 fadeIn">
         <ImagenBanner imagen={post?.mainImage} />
 
         <div className="mt-8 flex items-center justify-between">
