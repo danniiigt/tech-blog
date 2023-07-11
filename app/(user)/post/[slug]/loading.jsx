@@ -10,7 +10,7 @@ const Loading = () => {
     skeletons.push(
       <Skeleton
         key={i}
-        className="h-[14px]"
+        className="h-[14px] bg-muted/60"
         style={{
           width: `${randomWidth}%`,
         }}

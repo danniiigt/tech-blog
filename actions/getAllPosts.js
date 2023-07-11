@@ -11,9 +11,6 @@ export const getAllPosts = async () => {
 
   const posts = await sanityClient.fetch(query, {
     cache: "no-cache",
-    next: {
-      revalidate: 1,
-    },
   });
   return posts;
 };

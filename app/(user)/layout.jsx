@@ -1,5 +1,6 @@
 import { Header } from "./components/Header";
 import { Container } from "@/components/shared/Container";
+import "animate.css";
 
 export default function UserLayout({ children }) {
   return (

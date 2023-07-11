@@ -7,11 +7,14 @@ import { timeAgo } from "@/lib/timeAgo";
 import Link from "next/link";
 import Image from "next/image";
 
-export const PostCard = ({ post }) => {
+export const PostCard = ({ post, index }) => {
   const imageProps = useNextSanityImage(sanityClient, post.mainImage);
 
   return (
-    <Link href={`/post/${post?.slug?.current}`}>
+    <Link
+      href={`/post/${post?.slug?.current}`}
+      className="animate__animated animate__fadeIn relative z-50"
+    >
       <Card
         className="
             group 
@@ -68,10 +71,10 @@ export const PostCard = ({ post }) => {
         >
           <h1 className="text-muted-foreground truncate">{post?.title}</h1>
           <div className="flex flex-col">
-            <h1 className="whitespace-nowrap text-xs text-muted-foreground">
+            <h1 className="whitespace-nowrap text-right text-xs text-muted-foreground">
               {post?.author?.name}
             </h1>
-            <h1 className="whitespace-nowrap text-xs text-muted-foreground/50">
+            <h1 className="whitespace-nowrap text-right text-xs text-muted-foreground/50">
               {timeAgo(post?._createdAt)}
             </h1>
           </div>

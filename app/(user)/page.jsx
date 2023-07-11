@@ -1,11 +1,8 @@
 import { Container } from "@/components/shared/Container";
 import { Categories } from "./components/Categories";
 import { BlogList } from "./components/BlogList";
-import { getAllPosts } from "@/actions/getAllPosts";
 
-const Page = async () => {
-  const posts = await getAllPosts();
-
+const Page = () => {
   return (
     <Container>
       <div className="my-6">
@@ -13,7 +10,7 @@ const Page = async () => {
       </div>
 
       <div className="my-8">
-        <BlogList posts={posts} />
+        <BlogList />
       </div>
     </Container>
   );
