@@ -8,7 +8,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const PostCard = ({ post, index }) => {
-  const imageProps = useNextSanityImage(sanityClient, post.mainImage);
+  const imageProps = useNextSanityImage(sanityClient, post?.mainImage);
 
   return (
     <Link
@@ -38,7 +38,7 @@ export const PostCard = ({ post, index }) => {
         >
           <Image
             src={imageProps?.src || ""}
-            alt={post.title}
+            alt={post?.title}
             width={400}
             height={240}
             className="

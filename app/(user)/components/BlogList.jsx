@@ -7,6 +7,8 @@ import { useCategory } from "@/hooks/useCategory";
 import { useEffect } from "react";
 import useSWR, { mutate } from "swr";
 import { EmptyBlogList } from "./EmptyBlogList";
+import { BlogListHeader } from "./BlogListHeader";
+import post from "@/schemas/post";
 
 export const BlogList = () => {
   const { category } = useCategory();
@@ -16,11 +18,14 @@ export const BlogList = () => {
     return getAllPosts();
   };
 
-  useEffect(() => {
-    mutate("posts");
-  }, [category]);
+  const { data: posts, isLoading } = useSWR(
+    category ? "postsByCategory" : "posts",
+    getPosts
+  );
 
-  const { data: posts, isLoading } = useSWR("posts", getPosts);
+  useEffect(() => {
+    mutate("postsByCategory");
+  }, [category]);
 
   return (
     <>

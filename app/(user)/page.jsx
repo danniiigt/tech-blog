@@ -1,6 +1,7 @@
 import { Container } from "@/components/shared/Container";
 import { Categories } from "./components/Categories";
 import { BlogList } from "./components/BlogList";
+import { BlogCarousel } from "./components/BlogCarousel";
 
 const Page = () => {
   return (
@@ -9,7 +10,9 @@ const Page = () => {
         <Categories />
       </div>
 
-      <div className="my-8">
+      <div className="my-4">
+        <BlogCarousel />
+
         <BlogList />
       </div>
     </Container>

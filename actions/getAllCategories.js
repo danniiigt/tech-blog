@@ -11,7 +11,5 @@ export const getAllCategories = async () => {
 
   const categories = await sanityClient.fetch(query);
 
-  console.log(categories);
-
   return categories;
 };

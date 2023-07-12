@@ -55,7 +55,9 @@ export const Categories = () => {
         <div className="scroll-content flex gap-1">
           {!isLoading && (
             <TabsTrigger
-              onClick={() => setCategory(null)}
+              onClick={() => {
+                setCategory(null);
+              }}
               value="todo"
               className="
                 hover:bg-background/60
@@ -70,12 +72,12 @@ export const Categories = () => {
             categories.map((category, index) => (
               <TabsTrigger
                 key={index}
-                onClick={() =>
+                onClick={() => {
                   setCategory({
                     id: category._id,
                     title: category.title,
-                  })
-                }
+                  });
+                }}
                 value={category._id}
                 className="
                 hover:bg-background/60
