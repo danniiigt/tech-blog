@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { PortableText } from "@portabletext/react";
 import { RichTextComponents } from "./RichTextComponents";
 import { BlogBadge } from "../../components/BlogBadge";
+import { RandomBlogList } from "../../components/RandomBlogList";
 
 const PostPage = async ({ params }) => {
   const { slug } = params;
@@ -31,7 +32,18 @@ const PostPage = async ({ params }) => {
 
         <div className="mt-8 flex flex-col mb-2 sm:flex-row gap-y-4 items-start sm:items-center justify-between">
           <div>
-            <h1 className="text-xl mb-2">{post?.title}</h1>
+            <h1
+              className="text-xl mb-2"
+              style={
+                post.color
+                  ? {
+                      textDecoration: `3px underline ${post.color}`,
+                    }
+                  : {}
+              }
+            >
+              {post?.title}
+            </h1>
 
             <div className="text-muted-foreground flex flex-wrap items-center gap-2">
               <BlogBadge
@@ -43,6 +55,7 @@ const PostPage = async ({ params }) => {
                     strokeWidth={1.5}
                     stroke="currentColor"
                     className="w-3.5 h-3.5"
+                    style={post?.color ? { stroke: post.color } : {}}
                   >
                     <path
                       strokeLinecap="round"
@@ -64,6 +77,7 @@ const PostPage = async ({ params }) => {
                     strokeWidth={1.5}
                     stroke="currentColor"
                     className="w-3.5 h-3.5"
+                    style={post?.color ? { stroke: post.color } : {}}
                   >
                     <path
                       strokeLinecap="round"
@@ -85,6 +99,7 @@ const PostPage = async ({ params }) => {
                     strokeWidth={1.5}
                     stroke="currentColor"
                     className="w-3.5 h-3.5"
+                    style={post?.color ? { stroke: post.color } : {}}
                   >
                     <path
                       strokeLinecap="round"
@@ -111,6 +126,7 @@ const PostPage = async ({ params }) => {
                     strokeWidth={1.5}
                     stroke="currentColor"
                     className="w-3.5 h-3.5"
+                    style={post?.color ? { stroke: post.color } : {}}
                   >
                     <path
                       strokeLinecap="round"
@@ -136,7 +152,7 @@ const PostPage = async ({ params }) => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-5 h-5 hover:text-primary cursor-pointer"
+              className="w-5 h-5 hover:text-foreground cursor-pointer"
             >
               <path
                 strokeLinecap="round"
@@ -182,6 +198,8 @@ const PostPage = async ({ params }) => {
         <div className="mt-4 space-y-4 w-full md:w-3/4 lg:2/3 text-muted-foreground">
           <PortableText value={post?.body} components={RichTextComponents} />
         </div>
+
+        <RandomBlogList excludeId={post._id} />
       </div>
     </Container>
   );

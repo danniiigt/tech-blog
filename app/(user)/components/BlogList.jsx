@@ -4,8 +4,8 @@ import { PostCard } from "./PostCard";
 import { getAllPosts } from "@/actions/getAllPosts";
 import { useCategory } from "@/hooks/useCategory";
 import { useEffect, useState } from "react";
-import useSWR from "swr";
 import { EmptyBlogList } from "./EmptyBlogList";
+import useSWR from "swr";
 
 export const BlogList = () => {
   const { category } = useCategory();
