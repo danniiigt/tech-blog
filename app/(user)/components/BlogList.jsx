@@ -2,30 +2,34 @@
 
 import { PostCard } from "./PostCard";
 import { getAllPosts } from "@/actions/getAllPosts";
-import { getPostsByCategory } from "@/actions/getPostsByCategory";
 import { useCategory } from "@/hooks/useCategory";
-import { useEffect } from "react";
-import useSWR, { mutate } from "swr";
+import { useEffect, useState } from "react";
+import useSWR from "swr";
 import { EmptyBlogList } from "./EmptyBlogList";
-import { BlogListHeader } from "./BlogListHeader";
-import post from "@/schemas/post";
 
 export const BlogList = () => {
   const { category } = useCategory();
+  const { data: posts, isLoading } = useSWR("posts", getAllPosts);
+  const [postsByCategory, setPostsByCategory] = useState(posts);
 
-  const getPosts = () => {
-    if (category) return getPostsByCategory(category.id);
-    return getAllPosts();
+  const getPostsByCategory = (categoryId) => {
+    if (!isLoading) {
+      const postsByCategory = posts.filter((post) => {
+        return post.categories.find((category) => category._id === categoryId);
+      });
+
+      return postsByCategory;
+    }
   };
 
-  const { data: posts, isLoading } = useSWR(
-    category ? "postsByCategory" : "posts",
-    getPosts
-  );
-
   useEffect(() => {
-    mutate("postsByCategory");
-  }, [category]);
+    if (category) {
+      const postsByCategory = getPostsByCategory(category.id);
+      setPostsByCategory(postsByCategory);
+    } else {
+      setPostsByCategory(posts);
+    }
+  }, [category, posts]);
 
   return (
     <>
@@ -34,13 +38,14 @@ export const BlogList = () => {
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-3">
         {!isLoading &&
           category &&
-          posts.map((post, index) => (
+          postsByCategory.map((post, index) => (
             <PostCard key={index} post={post} index={index} />
           ))}
 
         {!isLoading &&
-          posts
-            .slice(3, posts.length)
+          !category &&
+          postsByCategory
+            ?.slice(3, postsByCategory.length)
             .map((post, index) => (
               <PostCard key={index} post={post} index={index} />
             ))}

@@ -7,6 +7,7 @@ export const getAllPosts = async () => {
     ...,
     author->,
     categories[]->,
+    "imageUrl": mainImage.asset->url
   } | order(_createdAt desc)`;
 
   const posts = await sanityClient.fetch(query);

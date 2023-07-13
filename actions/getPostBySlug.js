@@ -6,7 +6,8 @@ export const getPostBySlug = async (slug) => {
   *[_type == "post" && slug.current == $slug] {
     ...,
     author->,
-    categories[]->
+    categories[]->,
+    "imageUrl": mainImage.asset->url
   } | order(_createdAt desc)`;
 
   const post = await sanityClient.fetch(query, { slug });

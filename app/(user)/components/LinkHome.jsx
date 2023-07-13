@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-export const HeaderHome = () => {
+export const LinkHome = () => {
   const pathname = usePathname();
 
   if (pathname === "/") return null;

@@ -2,12 +2,10 @@
 
 import { getAllPosts } from "@/actions/getAllPosts";
 import { useCategory } from "@/hooks/useCategory";
-import { sanityClient } from "@/lib/sanity.client";
-import { useNextSanityImage } from "next-sanity-image";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 
 export const BlogCarousel = () => {
   const { data: posts, isLoading } = useSWR("posts", getAllPosts);
@@ -15,11 +13,6 @@ export const BlogCarousel = () => {
   const [width, setWidth] = useState(0);
   const { category } = useCategory();
   const maxPosts = 3;
-
-  const imageProps = useNextSanityImage(
-    sanityClient,
-    posts?.[imagenSeleccionada]?.mainImage
-  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -51,14 +44,14 @@ export const BlogCarousel = () => {
     };
   }, [imagenSeleccionada]);
 
-  if (category) return null;
+  if (category) return <></>;
 
   return (
     <div className="hidden sm:block relative w-full h-[400px] drop-shadow-xl mb-4">
       {!isLoading && (
         <Link href={`/post/${posts?.[imagenSeleccionada].slug?.current}`}>
           <Image
-            src={imageProps}
+            src={posts?.[imagenSeleccionada]?.imageUrl}
             alt="imagen"
             width={1024}
             height={400}

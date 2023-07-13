@@ -1,14 +1,11 @@
-import { sanityClient } from "@/lib/sanity.client";
-import { useNextSanityImage } from "next-sanity-image";
 import Image from "next/image";
+import { BlogReadTime } from "../../components/BlogReadTime";
 
-export const ImagenBanner = ({ imagen }) => {
-  const imageProps = useNextSanityImage(sanityClient, imagen);
-
+export const ImagenBanner = ({ imagen, estimatedTime }) => {
   return (
-    <div>
+    <div className="relative">
       <Image
-        src={imageProps?.src || ""}
+        src={imagen}
         alt={"Banner"}
         width={1024}
         height={400}
@@ -20,6 +17,8 @@ export const ImagenBanner = ({ imagen }) => {
           rounded-lg
         "
       />
+
+      <BlogReadTime estimatedTime={estimatedTime} />
     </div>
   );
 };

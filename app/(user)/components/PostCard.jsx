@@ -1,14 +1,24 @@
 "use client";
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { useNextSanityImage } from "next-sanity-image";
-import { sanityClient } from "@/lib/sanity.client";
 import { timeAgo } from "@/lib/timeAgo";
+import { BlogReadTime } from "./BlogReadTime";
 import Link from "next/link";
 import Image from "next/image";
 
-export const PostCard = ({ post, index }) => {
-  const imageProps = useNextSanityImage(sanityClient, post?.mainImage);
+export const PostCard = ({ post }) => {
+  const readingTime = (text) => {
+    const wordsPerMinute = 150;
+    const numberOfWords = text?.split(/\s/g).length;
+    return Math.ceil(numberOfWords / wordsPerMinute);
+  };
+
+  const bodyText = post?.body
+    ?.map((block) => block.children[0].text)
+    .join(",")
+    .replaceAll(",", "");
+
+  const estimatedTime = readingTime(bodyText);
 
   return (
     <Link
@@ -22,7 +32,7 @@ export const PostCard = ({ post, index }) => {
             transition 
             duration-200
             border-none
-            
+            relative
         "
       >
         <CardContent
@@ -37,7 +47,7 @@ export const PostCard = ({ post, index }) => {
           "
         >
           <Image
-            src={imageProps?.src || ""}
+            src={post?.imageUrl}
             alt={post?.title}
             width={400}
             height={240}
@@ -52,6 +62,8 @@ export const PostCard = ({ post, index }) => {
                 md:h-[190px]
             "
           />
+
+          <BlogReadTime estimatedTime={estimatedTime} />
         </CardContent>
         <CardFooter
           className="
