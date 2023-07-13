@@ -33,9 +33,17 @@ export const BlogList = () => {
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-3">
         {!isLoading &&
+          category &&
           posts.map((post, index) => (
             <PostCard key={index} post={post} index={index} />
           ))}
+
+        {!isLoading &&
+          posts
+            .slice(3, posts.length)
+            .map((post, index) => (
+              <PostCard key={index} post={post} index={index} />
+            ))}
       </div>
     </>
   );

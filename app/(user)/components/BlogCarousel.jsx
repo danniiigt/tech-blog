@@ -14,6 +14,7 @@ export const BlogCarousel = () => {
   const [imagenSeleccionada, setImagenSeleccionada] = useState(0);
   const [width, setWidth] = useState(0);
   const { category } = useCategory();
+  const maxPosts = 3;
 
   const imageProps = useNextSanityImage(
     sanityClient,
@@ -35,7 +36,7 @@ export const BlogCarousel = () => {
           requestAnimationFrame(step);
         } else {
           setImagenSeleccionada((prev) => {
-            if (prev === 3) return 0;
+            if (prev === maxPosts - 1) return 0;
             return prev + 1;
           });
         }
@@ -66,8 +67,65 @@ export const BlogCarousel = () => {
         </Link>
       )}
 
-      <div className="absolute bottom-0 w-full bg-background/30 backdrop-blur-lg rounded drop-shadow-lg p-5 flex justify-between items-center">
-        <h1 className="text-md font-semibold">
+      <div
+        className="
+          absolute 
+          bg-foreground/30
+          dark:bg-background/30 
+          text-background 
+          dark:text-foreground 
+          backdrop-blur-lg 
+          top-0
+          right-5
+          px-5
+          py-2
+          rounded-b-md
+          flex
+          items-center
+          gap-3
+        "
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-5 h-5"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6 6h.008v.008H6V6z"
+          />
+        </svg>
+        <h1>{posts?.[imagenSeleccionada]?.categories?.[0].title}</h1>
+      </div>
+
+      <div
+        className="
+          absolute 
+          bottom-0 
+          w-full 
+          bg-foreground/30 
+          dark:bg-background/30 
+          text-background 
+          dark:text-foreground 
+          backdrop-blur-lg 
+          rounded 
+          drop-shadow-lg 
+          p-5 
+          flex 
+          justify-between 
+          items-center
+        "
+      >
+        <h1 className="text-md  font-semibold">
           {posts?.[imagenSeleccionada].title}
         </h1>
 
@@ -88,13 +146,14 @@ export const BlogCarousel = () => {
           </svg>
 
           <h1>
-            {imagenSeleccionada + 1}/{posts?.length}
+            {imagenSeleccionada + 1}/{maxPosts}
           </h1>
 
           <div className="flex items-center">
             <svg
               onClick={() => {
-                if (imagenSeleccionada === 0) return;
+                if (imagenSeleccionada === 0)
+                  return setImagenSeleccionada(maxPosts - 1);
                 setImagenSeleccionada(imagenSeleccionada - 1);
               }}
               xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +172,9 @@ export const BlogCarousel = () => {
 
             <svg
               onClick={() => {
-                if (imagenSeleccionada === posts?.length - 1) return;
+                if (imagenSeleccionada === maxPosts - 1)
+                  return setImagenSeleccionada(0);
+
                 setImagenSeleccionada(imagenSeleccionada + 1);
               }}
               xmlns="http://www.w3.org/2000/svg"
