@@ -27,12 +27,12 @@ export const PostCard = ({ post, variant = "contained" }) => {
     >
       <Card
         className="
-            group 
-            hover:border-muted-foreground/50 
-            transition 
-            duration-200
-            border-none
-            relative
+          group 
+          hover:border-muted-foreground/50 
+          transition 
+          duration-200
+          border-none
+          relative
         "
       >
         <CardContent

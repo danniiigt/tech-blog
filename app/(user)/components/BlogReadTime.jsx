@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 
 export const BlogReadTime = ({ estimatedTime }) => {
   return (
-    <Badge className="bg-background text-foreground absolute top-3 left-3 text-xs">
+    <Badge className="bg-background text-foreground absolute top-3 left-3 text-xs hover:bg-background">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

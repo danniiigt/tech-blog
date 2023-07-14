@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
+import { Icons } from "@/components/ui/icons";
 import Link from "next/link";
 
 const LoginForm = () => {
@@ -37,7 +38,9 @@ const LoginForm = () => {
 
   const handleSocialLogin = async (provider) => {
     setLoading(provider);
-    await signIn(provider);
+    await signIn(provider, {
+      callbackUrl: "/",
+    });
   };
 
   return (
@@ -59,7 +62,7 @@ const LoginForm = () => {
             loading={loading === "github"}
             disabled={loading != null}
           >
-            {/* {!loading && <Icons.gitHub className="mr-2 h-4 w-4" />} */}
+            {!loading && <Icons.gitHub className="mr-2 h-4 w-4" />}
             Github
           </Button>
           <Button
@@ -70,7 +73,7 @@ const LoginForm = () => {
             loading={loading === "google"}
             disabled={loading != null}
           >
-            {/* {loading !== "google" && <Icons.google className="mr-2 h-4 w-4" />} */}
+            {loading !== "google" && <Icons.google className="mr-2 h-4 w-4" />}
             Google
           </Button>
         </div>

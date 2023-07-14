@@ -1,12 +1,11 @@
 "use client";
 
 import { getAllPosts } from "@/actions/getAllPosts";
-import useSWR from "swr";
 import { PostCard } from "./PostCard";
+import useSWR from "swr";
 
 export const RandomBlogList = ({ excludeId }) => {
   const { data: posts, isLoading } = useSWR("posts", getAllPosts);
-  console.log({ posts, excludeId });
 
   const getRandomPosts = () => {
     if (!isLoading) {
