@@ -1,4 +1,5 @@
-import { getPostBySlug } from "@/actions/getPostBySlug";
+"use client";
+
 import { Container } from "@/components/shared/Container";
 import { ImagenBanner } from "./ImagenBanner";
 import { timeAgo } from "@/lib/timeAgo";
@@ -7,10 +8,21 @@ import { PortableText } from "@portabletext/react";
 import { RichTextComponents } from "./RichTextComponents";
 import { BlogBadge } from "../../components/BlogBadge";
 import { RandomBlogList } from "../../components/RandomBlogList";
+import { getAllPosts } from "@/actions/getAllPosts";
+import useSWR from "swr";
+import { useEffect, useState } from "react";
 
-const PostPage = async ({ params }) => {
+const PostPage = ({ params }) => {
   const { slug } = params;
-  const post = await getPostBySlug(slug);
+  const { data: posts, isLoading } = useSWR("posts", getAllPosts);
+  const [post, setPost] = useState(null);
+
+  const getPostBySlug = (slug) => {
+    if (!isLoading) {
+      const post = posts.find((post) => post?.slug.current === slug);
+      setPost(post);
+    }
+  };
 
   const readingTime = (text) => {
     const wordsPerMinute = 150;
@@ -25,6 +37,10 @@ const PostPage = async ({ params }) => {
 
   const estimatedTime = readingTime(bodyText);
 
+  useEffect(() => {
+    getPostBySlug(slug);
+  }, [posts, isLoading]);
+
   return (
     <Container>
       <div className="my-8 fadeIn">
@@ -35,9 +51,9 @@ const PostPage = async ({ params }) => {
             <h1
               className="text-xl mb-2"
               style={
-                post.color
+                post?.color
                   ? {
-                      textDecoration: `3px underline ${post.color}`,
+                      textDecoration: `3px underline ${post?.color}`,
                     }
                   : {}
               }
@@ -55,7 +71,7 @@ const PostPage = async ({ params }) => {
                     strokeWidth={1.5}
                     stroke="currentColor"
                     className="w-3.5 h-3.5"
-                    style={post?.color ? { stroke: post.color } : {}}
+                    style={post?.color ? { stroke: post?.color } : {}}
                   >
                     <path
                       strokeLinecap="round"
@@ -77,7 +93,7 @@ const PostPage = async ({ params }) => {
                     strokeWidth={1.5}
                     stroke="currentColor"
                     className="w-3.5 h-3.5"
-                    style={post?.color ? { stroke: post.color } : {}}
+                    style={post?.color ? { stroke: post?.color } : {}}
                   >
                     <path
                       strokeLinecap="round"
@@ -99,7 +115,7 @@ const PostPage = async ({ params }) => {
                     strokeWidth={1.5}
                     stroke="currentColor"
                     className="w-3.5 h-3.5"
-                    style={post?.color ? { stroke: post.color } : {}}
+                    style={post?.color ? { stroke: post?.color } : {}}
                   >
                     <path
                       strokeLinecap="round"
@@ -126,7 +142,7 @@ const PostPage = async ({ params }) => {
                     strokeWidth={1.5}
                     stroke="currentColor"
                     className="w-3.5 h-3.5"
-                    style={post?.color ? { stroke: post.color } : {}}
+                    style={post?.color ? { stroke: post?.color } : {}}
                   >
                     <path
                       strokeLinecap="round"
@@ -199,7 +215,7 @@ const PostPage = async ({ params }) => {
           <PortableText value={post?.body} components={RichTextComponents} />
         </div>
 
-        <RandomBlogList excludeId={post._id} />
+        <RandomBlogList excludeId={post?._id} />
       </div>
     </Container>
   );
