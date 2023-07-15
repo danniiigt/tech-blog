@@ -5,38 +5,32 @@ import StudioButton from "./StudioButton";
 import getCurrentUser from "@/actions/getCurrentUser";
 import Link from "next/link";
 import { Search } from "./Search";
+import { Logo } from "@/app/(admin)/studio/components/Logo";
+import { HeaderMenu } from "./HeaderMenu";
 
 export const Header = async () => {
   const user = await getCurrentUser();
 
   return (
     <header className="flex items-center justify-between">
-      <div>
-        <Link href="/" className="flex items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mr-2 h-5 w-5"
-          >
-            <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"></path>
-          </svg>
-          <h1 className="text-lg">Tech Blog</h1>
-        </Link>
-        <h1 className="text-muted-foreground">El blog de la tecnología</h1>
+      <div className="flex items-center">
+        <Logo className="mr-2 h-7 w-7 md:h-9 md:w-9" />
+        <div>
+          <h1 className="text-md md:text-lg">Tech Blog</h1>
+          <h1 className="text-muted-foreground text-sm md:text-md -mt-1 md:-mt-2">
+            El blog de la tecnología
+          </h1>
+        </div>
       </div>
 
-      <div className="flex items-center gap-x-2 text-muted-foreground">
+      <div className="hidden sm:flex items-center gap-x-2 text-muted-foreground">
         <Search />
         <LinkHome />
         <StudioButton user={user} />
         <ThemeSwitcher />
         <UserMenu user={user} />
       </div>
+      <HeaderMenu user={user} />
     </header>
   );
 };

@@ -28,7 +28,10 @@ const Header = () => {
           </h1>
         </div>
       </Link>
-      <ThemeSwitcher />
+
+      <div className="w-8">
+        <ThemeSwitcher />
+      </div>
     </div>
   );
 };

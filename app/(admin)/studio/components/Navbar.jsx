@@ -3,7 +3,7 @@ import Link from "next/link";
 export const Navbar = (props) => {
   return (
     <div>
-      <div className="py-[15px] px-[20px] bg-primary/75 text-white">
+      <div className="hidden sm:block py-[15px] px-[20px] bg-primary/75 text-white">
         <div className="w-full flex items-center justify-between">
           <div className="w-1/3">
             <Link

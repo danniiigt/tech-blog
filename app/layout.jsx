@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ToasterProvider } from "@/providers/ToastProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
           defaultTheme="dark"
           enableColorScheme
         >
+          <ToasterProvider />
           {children}
         </ThemeProvider>
       </body>

@@ -43,7 +43,7 @@ const PostPage = ({ params }) => {
 
   return (
     <Container>
-      <div className="my-8 fadeIn">
+      <div className="my-4 lg:my-8 fadeIn">
         <ImagenBanner imagen={post?.imageUrl} estimatedTime={estimatedTime} />
 
         <div className="mt-8 flex flex-col mb-2 sm:flex-row gap-y-4 items-start sm:items-center justify-between">

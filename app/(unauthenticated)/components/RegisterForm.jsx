@@ -9,11 +9,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Icons } from "@/components/ui/icons";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Link from "next/link";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const RegisterForm = () => {
   const [loading, setLoading] = useState(null);
@@ -34,21 +38,50 @@ const RegisterForm = () => {
   });
 
   const password = watch("password");
-  const handleCredentialsRegister = () => {
+
+  const handleCredentialsRegister = async ({ name, email, password }) => {
     setLoading("credentials");
-    reset();
+
+    try {
+      const res = await axios.post("/api/register", {
+        name,
+        email,
+        password,
+      });
+
+      console.log(res);
+
+      if (res.status === 201) {
+        await signIn("credentials", {
+          email,
+          password,
+          callbackUrl: "/",
+        });
+      }
+    } catch (error) {
+      toast.error("Ya existe una cuenta con este correo electrónico");
+    }
+
+    setLoading(null);
   };
 
   const handleSocialRegister = async (provider) => {
     setLoading(provider);
-    signIn(provider, { callbackUrl: "http://localhost:3000/credentials" });
+    await signIn(provider, {
+      callbackUrl: "/",
+    });
   };
 
   return (
-    <Card className="w-full max-w-[575px] border-none">
-      <CardHeader className="pt-0">
+    <Card className="w-full max-w-[575px] border-none shadow-none">
+      <CardHeader>
         <CardTitle>Crear una cuenta</CardTitle>
-        <CardDescription className="text-neutral-500">
+        <CardDescription
+          className="text-neutral-500"
+          style={{
+            textWrap: "balance",
+          }}
+        >
           Unete a Tech Blog y recibe las ultimas noticias de tecnologia en tu
           correo
         </CardDescription>
@@ -64,7 +97,7 @@ const RegisterForm = () => {
             loading={loading === "github"}
             disabled={loading != null}
           >
-            {/* {loading !== "github" && <Icons.gitHub className="mr-2 h-4 w-4" />} */}
+            {loading !== "github" && <Icons.gitHub className="mr-2 h-4 w-4" />}
             Github
           </Button>
           <Button
@@ -75,7 +108,7 @@ const RegisterForm = () => {
             loading={loading === "google"}
             disabled={loading != null}
           >
-            {/* {loading !== "google" && <Icons.google className="mr-2 h-4 w-4" />} */}
+            {loading !== "google" && <Icons.google className="mr-2 h-4 w-4" />}
             Google
           </Button>
         </div>

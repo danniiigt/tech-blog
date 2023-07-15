@@ -1,17 +1,21 @@
 import Link from "next/link";
 
 const StudioButton = ({ user }) => {
-  if (!user) return null;
+  if (!user) return;
+  if (user?.role !== "admin") return;
 
   return (
-    <Link href="/studio" className="p-2 hover:text-foreground">
+    <Link
+      href="/studio"
+      className="p-2 text-muted-foreground hover:text-foreground w-full"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="w-6 h-6"
+        className="w-6 h-6 mx-auto"
       >
         <path
           strokeLinecap="round"

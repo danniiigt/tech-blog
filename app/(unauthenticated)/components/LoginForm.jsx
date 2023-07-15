@@ -16,8 +16,11 @@ import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { Icons } from "@/components/ui/icons";
 import Link from "next/link";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+  const router = useRouter();
   const [loading, setLoading] = useState(null);
   const {
     handleSubmit,
@@ -31,13 +34,26 @@ const LoginForm = () => {
     },
   });
 
-  const handleCredentialsLogin = () => {
+  const handleCredentialsLogin = async ({ email, password }) => {
     setLoading("credentials");
-    reset();
+
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
+
+    if (!res.ok) {
+      toast.error("Credenciales inválidas");
+      setLoading(null);
+    } else {
+      router.push("/");
+    }
   };
 
   const handleSocialLogin = async (provider) => {
     setLoading(provider);
+
     await signIn(provider, {
       callbackUrl: "/",
     });
@@ -137,11 +153,7 @@ const LoginForm = () => {
               placeholder="Contraseña segura"
               className={errors.password && "border-red-500"}
               {...register("password", {
-                required: "Este campo es requerido",
-                minLength: {
-                  value: 8,
-                  message: "La contraseña debe tener al menos 8 caracteres",
-                },
+                required: "Indica tu contraseña",
               })}
             />
             <Label className="text-red-500 font-light text-xs">

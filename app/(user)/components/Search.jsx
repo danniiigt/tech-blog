@@ -65,13 +65,11 @@ export const Search = () => {
     callback();
   }, []);
 
-  console.log(posts);
-
   return (
     <>
       <div
         onClick={() => setIsOpen(true)}
-        className="p-2 hover:text-foreground cursor-pointer"
+        className="p-2 text-muted-foreground hover:text-foreground cursor-pointer w-full"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +77,7 @@ export const Search = () => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="w-6 h-6 mx-auto"
         >
           <path
             strokeLinecap="round"
