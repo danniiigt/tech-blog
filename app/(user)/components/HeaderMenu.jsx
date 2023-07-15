@@ -63,7 +63,7 @@ export const HeaderMenu = ({ user = null }) => {
         </DialogTrigger>
         <DialogContent
           hideCross
-          className="w-full max-w-[calc(100%-32px)] p-3 h-fit max-h-[400px] top-[15px] rounded translate-y-0 gap-0"
+          className="w-full block max-w-[calc(100%-32px)] p-3 top-[15px] rounded translate-y-0 gap-0"
         >
           <div className="flex flex-col gap-2">
             {!user && (
