@@ -33,6 +33,7 @@ export const PostCard = ({ post, variant = "contained" }) => {
           duration-200
           border-none
           relative
+          shadow-none
         "
       >
         <CardContent
