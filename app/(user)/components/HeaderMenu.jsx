@@ -3,9 +3,9 @@ import { Search } from "./Search";
 import { ThemeSwitcher } from "@/components/shared/ThemeSwitcher";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { HeaderLogOut } from "./HeaderLogOut";
 import StudioButton from "./StudioButton";
 import Link from "next/link";
+import { HeaderLogOut } from "./HeaderLogout";
 
 export const MenuBox = ({ icon, text, href }) => {
   return (
