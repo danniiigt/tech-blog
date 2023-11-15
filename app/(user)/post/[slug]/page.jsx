@@ -1,5 +1,3 @@
-"use client";
-
 import { Container } from "@/components/shared/Container";
 import { ImagenBanner } from "./ImagenBanner";
 import { timeAgo } from "@/lib/timeAgo";
@@ -8,21 +6,22 @@ import { PortableText } from "@portabletext/react";
 import { RichTextComponents } from "./RichTextComponents";
 import { BlogBadge } from "../../components/BlogBadge";
 import { RandomBlogList } from "../../components/RandomBlogList";
-import { getAllPosts } from "@/actions/getAllPosts";
-import useSWR from "swr";
-import { useEffect, useState } from "react";
+import { getAllPostsSlugs } from "@/actions/getAllPostsSlugs";
+import { getPostBySlug } from "@/actions/getPostBySlug";
 
-const PostPage = ({ params }) => {
+export const dynamic = "force-static";
+export const revalidate = 300;
+
+export const generateStaticParams = async () => {
+  const slugs = await getAllPostsSlugs();
+  return slugs.map((slug) => ({
+    slug: slug.slug.current,
+  }));
+};
+
+const PostPage = async ({ params }) => {
   const { slug } = params;
-  const { data: posts, isLoading } = useSWR("posts", getAllPosts);
-  const [post, setPost] = useState(null);
-
-  const getPostBySlug = (slug) => {
-    if (!isLoading) {
-      const post = posts.find((post) => post?.slug.current === slug);
-      setPost(post);
-    }
-  };
+  const post = await getPostBySlug(slug);
 
   const readingTime = (text) => {
     const wordsPerMinute = 150;
@@ -36,10 +35,6 @@ const PostPage = ({ params }) => {
     .replaceAll(",", "");
 
   const estimatedTime = readingTime(bodyText);
-
-  useEffect(() => {
-    getPostBySlug(slug);
-  }, [posts, isLoading]);
 
   return (
     <Container>

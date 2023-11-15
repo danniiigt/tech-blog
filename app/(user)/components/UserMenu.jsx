@@ -12,8 +12,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const UserMenu = ({ user = null }) => {
+  const pathname = usePathname();
+
+  if (pathname !== "/") return null;
+
   if (user) {
     return (
       <div className="hidden sm:block">

@@ -3,7 +3,6 @@ import { ThemeSwitcher } from "@/components/shared/ThemeSwitcher";
 import { LinkHome } from "./LinkHome";
 import StudioButton from "./StudioButton";
 import getCurrentUser from "@/actions/getCurrentUser";
-import Link from "next/link";
 import { Search } from "./Search";
 import { Logo } from "@/app/(admin)/studio/components/Logo";
 import { HeaderMenu } from "./HeaderMenu";
