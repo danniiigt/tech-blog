@@ -10,7 +10,7 @@ import { getAllPostsSlugs } from "@/actions/getAllPostsSlugs";
 import { getPostBySlug } from "@/actions/getPostBySlug";
 
 export const dynamic = "force-static";
-export const revalidate = 300;
+export const revalidate = 120;
 
 export const generateStaticParams = async () => {
   const slugs = await getAllPostsSlugs();
